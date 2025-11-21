@@ -2,10 +2,9 @@ package exceptions;
 
 public class ExceptionsDemo {
     public static void show() {
-        // This will cause a common exception called NullPointerException.
-        // An exception is an object that contains information about an error.
-        // In this case, this object is an instance of the NullPointerException class
-
+        // In Java there are three types of Exceptions
+        // Checked Exceptions, Unchecked (runtime) Exceptions, Errors
+        // Types of Runtime Exceptions include: NullPointerException, ArithmeticException, IllegalArgumentException, IndexOutOfBoundsException, IllegalStateException
         sayHello(null);
     }
 

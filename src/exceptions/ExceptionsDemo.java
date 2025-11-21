@@ -1,11 +1,17 @@
 package exceptions;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+
 public class ExceptionsDemo {
     public static void show() {
-        // In Java there are three types of Exceptions
-        // Checked Exceptions, Unchecked (runtime) Exceptions, Errors
-        // Types of Runtime Exceptions include: NullPointerException, ArithmeticException, IllegalArgumentException, IndexOutOfBoundsException, IllegalStateException
-        sayHello(null);
+        try {
+           var reader = new FileReader("file.txt");
+            System.out.println("File Opened");
+        } catch(FileNotFoundException ex) {
+            System.out.println(ex.getMessage());
+        }
+
     }
 
     public static void sayHello(String name) {

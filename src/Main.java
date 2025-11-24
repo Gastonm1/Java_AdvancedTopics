@@ -1,10 +1,10 @@
-import exceptions.ExceptionsDemo;
 import generics.GenericList;
-import generics.User;
-import generics.Utils;
 
 public class Main {
     public static void main(String[] args) {
-        Utils.print(1, 10);
+       var list = new GenericList<String>();
+      for (var item : list){
+          System.out.println(item);
+      }
     }
 }

@@ -1,13 +1,13 @@
 import exceptions.ExceptionsDemo;
+import generics.GenericList;
+
 
 import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
-        try {
-            ExceptionsDemo.show();
-        } catch (Throwable e) {
-            throw new RuntimeException("An unexpected error occurred.");
-        }
+         var list = new GenericList<Integer>();
+         list.add(1);
+         int number = list.get(0);
     }
 }

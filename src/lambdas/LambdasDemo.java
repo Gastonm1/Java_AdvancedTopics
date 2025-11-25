@@ -1,17 +1,15 @@
 package lambdas;
 
-import java.util.List;
-import java.util.function.Consumer;
+// Supplier Interface
+import java.util.function.Supplier;
 
-// Chain Consumers
-// We can run multiple operations IN sequence
+// This is the opposite of the consumer interface.
+// So instead of consuming a value, it supplies a value
+
 public class LambdasDemo {
     public static void show() {
-        List<String> list = List.of("a","b","c");
-        Consumer<String> print = (String item) -> System.out.println(item);
-        Consumer<String> printUpperCase = (String item) -> System.out.println(item.toUpperCase());
-
-        // Here we can show the Print and then print UpperCase using the andThen() method.
-        list.forEach(print.andThen(printUpperCase).andThen(print));
+        Supplier<Double> getRandom = () -> Math.random();
+        var random = getRandom.get();
+        System.out.println(random);
     }
 }

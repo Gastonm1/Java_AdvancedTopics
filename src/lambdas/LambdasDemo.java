@@ -1,22 +1,20 @@
 package lambdas;
 
-// The Combining Predicate Functions
+// The Unary Operator Predicate Functions
 
+// This is a functional interface and can therefore be used as the assignment target for a lambda expression or method interface.
 
-import java.util.function.Predicate;
+import java.util.function.UnaryOperator;
 
 public class LambdasDemo {
     public static void show() {
-    Predicate<String> hasLeftBrace = str -> str.contains("{");
-    Predicate<String> hasRightBrace = str -> str.endsWith("}");
+        UnaryOperator<Integer> square = n -> n * n;
+        UnaryOperator<Integer> increment = n -> n + 1;
 
-        // and = &&
-        // || = or
-        // ! = negate
-//    Predicate<String> hasLeftAndRightBraces = hasLeftBrace.and(hasRightBrace);
-//    var result = hasLeftAndRightBraces.test("{key:value}"); // true
-//      var result hasLeftBrace = hasLeftBrace.or(hasRightBrace); // true;
-//      hasLeftBrace.negate(); // returns the opposite of the first predicate
-//      ystem.out.println(result);
+        // Get the square root of a number AND THEN increment by 1
+
+        var result = increment.andThen(square).apply(1); // 4
+        System.out.println(result);
+
     }
 }

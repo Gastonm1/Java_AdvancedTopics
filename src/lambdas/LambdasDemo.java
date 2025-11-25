@@ -1,27 +1,17 @@
 package lambdas;
 
+import java.util.List;
+import java.util.function.Consumer;
+
+// Chain Consumers
+// We can run multiple operations IN sequence
 public class LambdasDemo {
-    public void print(String message){
+    public static void show() {
+        List<String> list = List.of("a","b","c");
+        Consumer<String> print = (String item) -> System.out.println(item);
+        Consumer<String> printUpperCase = (String item) -> System.out.println(item.toUpperCase());
 
-    }
-
-    public void show() {
-//        greet(message -> System.out.println(message));
-//        // rewrite the above with a method reference
-//        greet(System.out::println);
-
-        // Passing the parameter to an existing method aka Method Reference
-        // Syntax
-        // Class:Object::method();
-//        greet(message -> print(message));
-//        greet(LambdasDemo::print);
-        // For an Instance
-//        var demo = new LambdasDemo();
-//        greet(message -> demo.print(message));
-//        greet(demo::print);
-    }
-
-    public static void greet(Printer printer) {
-        printer.print("Hello World");
+        // Here we can show the Print and then print UpperCase using the andThen() method.
+        list.forEach(print.andThen(printUpperCase).andThen(print));
     }
 }

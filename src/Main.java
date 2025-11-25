@@ -1,15 +1,10 @@
-import collections.Customer;
-import collections.EmailComparator;
-import collections.SetDemo;
-
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import lambdas.LambdasDemo;
 
 public class Main {
+    // What is a functional interface?
+    // An interface with a single abstract method
+
     public static void main(String[] args) {
-    List<Customer> customers = new ArrayList<>();
-        SetDemo.show();
+        LambdasDemo.show();
     }
 }

@@ -1,16 +1,16 @@
 package lambdas;
 
-// Functional Interface
-import java.util.function.Function;
-import java.util.function.Supplier;
+// The Predicate Interface
+// This is a functional interface and can therefore be used as the assignment
+// target for a lambda expression or method reference.
 
-// This interface represents a function or an operation that takes an argument and returns a value.
-//
+import java.util.function.Predicate;
 
 public class LambdasDemo {
     public static void show() {
-    Function<String, Integer> map = str -> str.length();
-    var length = map.apply("Sky");
-        System.out.println(length);
+    Predicate<String> isLongerThan5 = str -> str.length() > 5;
+    var result = isLongerThan5.test("sky");
+    System.out.println(result);
+
     }
 }

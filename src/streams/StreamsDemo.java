@@ -1,7 +1,6 @@
 package streams;
-import java.util.Comparator;
 import java.util.List;
-import java.util.function.Predicate;
+
 
 public class StreamsDemo {
     public static void show() {
@@ -11,31 +10,15 @@ public class StreamsDemo {
                 new Movie("c", 20)
         );
 
+        // PEEKING ELEMENTS
+        // While working with complex queries you may run into issues. You get the wrong result.
+        // To troubleshoot these issues, you can use the .peek() method.
+        // With the .peek() method we can observe the output of each operation.
 
-        // MAPPING
-        // get movie titles
-//        movies.stream().map(movie -> movie.getTitle()).forEach(name -> System.out.println(name));
-//        // get movie likes
-//        movies.stream().mapToInt(movie -> movie.getLikes()).forEach(like -> System.out.println(like));
-
-        // FILTERING
-//        Predicate<Movie> isPopular = m -> m.getLikes() > 10;
-//        movies.stream().filter(isPopular).forEach(m -> System.out.println(m.getTitle()));
-
-        // SLICING
-        // slice a specific movie title
-//        movies.stream().skip(2).forEach(m -> System.out.println(m.getTitle()));
-
-        // SORT
-        // reverse
-//        movies.stream().sorted(Comparator.comparing(Movie::getTitle).reversed()).forEach(m -> System.out.println(m.getTitle()));
-//        // forward
-//        movies.stream().sorted(Comparator.comparing(Movie::getTitle)).forEach(m -> System.out.println(m.getTitle()));
-
-        // Getting Unique Elements
-        movies.stream()
-                .map(Movie::getLikes)
-                .distinct() // removes any duplicates
+        movies.stream().filter(m -> m.getLikes() > 10)
+                .peek(m -> System.out.println("filtered: " + m.getTitle()))
+                .map(Movie::getTitle)
+                .peek(t -> System.out.println(("mapped: " + t)))
                 .forEach(System.out::println);
     }
 }

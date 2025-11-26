@@ -1,24 +1,28 @@
 package streams;
 import java.util.List;
+import java.util.Optional;
 
 
 public class StreamsDemo {
     public static void show() {
         var movies = List.of(
                 new Movie("a", 10),
-                new Movie("b", 15),
-                new Movie("c", 20)
+                new Movie("b", 20),
+                new Movie("c", 30)
         );
 
-        // PEEKING ELEMENTS
-        // While working with complex queries you may run into issues. You get the wrong result.
-        // To troubleshoot these issues, you can use the .peek() method.
-        // With the .peek() method we can observe the output of each operation.
+        // General Reducer
+        // Reduce the object to add up all the likes from the movies
 
-        movies.stream().filter(m -> m.getLikes() > 10)
-                .peek(m -> System.out.println("filtered: " + m.getTitle()))
-                .map(Movie::getTitle)
-                .peek(t -> System.out.println(("mapped: " + t)))
-                .forEach(System.out::println);
+        Optional<Integer> sum = movies.stream()
+//                .map(Movie::getLikes)
+//                .reduce(Integer::sum);
+                // [10,20,30]
+                // [30,30]
+                // [60]
+                // LAMBDA REFERENCE ^ same result
+                .map(Movie::getLikes)
+                .reduce(Integer::sum);
+        System.out.println(sum.orElse(0));
     }
 }

@@ -1,7 +1,8 @@
 import streams.CreatingStreamsDemo;
+import streams.StreamsDemo;
 
 public class Main {
     public static void main(String[] args) {
-        CreatingStreamsDemo.show();
+        StreamsDemo.show();
     }
 }

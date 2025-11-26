@@ -1,6 +1,6 @@
 package streams;
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 public class StreamsDemo {
@@ -11,18 +11,20 @@ public class StreamsDemo {
                 new Movie("c", 30)
         );
 
-        // General Reducer
-        // Reduce the object to add up all the likes from the movies
+        // Collectors class (https://docs.oracle.com/javase/8/docs/api/java/util/stream/Collectors.html)
+        // The Collector implements various useful reduction operations
+        // accumulating elements into collections
+        // summarizing elements according to various criteria, etc.
+        // EX:
+        // toList() -> Returns a Collector that accumulates the input elements into a new List
+        // toSet() -> Returns a Collector that accumulates the input elements into a new Set
+        // toMap() -> Returns a Collector that accumulates elements into a Map whose keys and values are the result of applying the provided mapping functions to the input elements.
+        var result = movies.stream()
+                .filter(m -> m.getLikes() > 10)
+//                .collect(Collectors.toList());
+//                .collect(Collectors.toSet());
+                  .collect(Collectors.toMap(m -> m.getTitle(), m -> m.getLikes()));
 
-        Optional<Integer> sum = movies.stream()
-//                .map(Movie::getLikes)
-//                .reduce(Integer::sum);
-                // [10,20,30]
-                // [30,30]
-                // [60]
-                // LAMBDA REFERENCE ^ same result
-                .map(Movie::getLikes)
-                .reduce(Integer::sum);
-        System.out.println(sum.orElse(0));
+        System.out.println(result);
     }
 }

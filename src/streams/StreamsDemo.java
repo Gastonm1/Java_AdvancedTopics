@@ -11,22 +11,17 @@ public class StreamsDemo {
                 new Movie("c", 30, Genre.ACTION)
         );
 
-        // Sometimes you may want to group or classify the data
-        // Ex: classify the movies by genre.
+        // Partition the movies into two categories
+        // Movies with more than 20 likes & movies with less than 20 likes
+        // We have a collector for this purpose
+        // get the likes > 20
+        // create collector and reference the title and join together as string with "," to separate
         var result = movies.stream()
-                // Separated into objects by genre
-//                .collect(Collectors.groupingBy(
-//                        Movie::getGenre));
-
-                // Number of objects OF each Genre
-                //  .collect(Collectors.groupingBy(
-                //   Movie::getGenre, Collectors.counting()));
-
-                // Join name of movies with comma (CAN ONLY JOIN WITH STRINGS)
-                // So get the movie title FIRST and then join
-                .collect(Collectors.groupingBy(
-                        Movie::getGenre,
-                        Collectors.mapping(Movie::getTitle, Collectors.joining(","))));
+                .collect(Collectors.partitioningBy(
+                        m -> m.getLikes() > 20,
+                        Collectors.mapping(Movie::getTitle, Collectors.joining(", "))));
         System.out.println(result);
+
+
     }
 }

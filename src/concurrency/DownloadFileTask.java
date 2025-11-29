@@ -6,7 +6,6 @@ public class DownloadFileTask implements Runnable {
         System.out.println("Starting file download: " + Thread.currentThread().getName());
 
       for (var i = 0; i < Integer.MAX_VALUE; i++) {
-          // This checks IF the thread is interrupted at all and is so breaks or just returns.
           if(Thread.currentThread().isInterrupted()) return;
           System.out.println("Downloading byte " + i);
       }

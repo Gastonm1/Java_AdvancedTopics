@@ -2,16 +2,19 @@ package concurrency;
 
 public class ThreadDemo {
     public static void show() {
-        System.out.println(Thread.currentThread().getName());
+        Thread thread = new Thread(new DownloadFileTask());
+        thread.start();
 
-
-        // Because of the .sleep() method on DownloadFileTask.java all the threads below (10 threads) will start at the same time
-        // BUT WILL NOT complete until after 5 seconds.
-        // When running you will see them start. count to 5 and you will see them complete.
-        for (var i = 0; i < 10; i++) {
-            Thread thread = new Thread(new DownloadFileTask());
-            thread.start();
+        // .join() method makes the current thread wait until another thread finishes.
+        // Thinking of it like: Don't continue until this work finishes their task.
+        // We tell the current thread to wait for the other thread to finish and then execute.
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
+        System.out.println("File is ready to be scanned");
+
 
     }
 }

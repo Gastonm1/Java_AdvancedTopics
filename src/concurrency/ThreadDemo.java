@@ -5,16 +5,21 @@ public class ThreadDemo {
         Thread thread = new Thread(new DownloadFileTask());
         thread.start();
 
-        // .join() method makes the current thread wait until another thread finishes.
-        // Thinking of it like: Don't continue until this work finishes their task.
-        // We tell the current thread to wait for the other thread to finish and then execute.
+        // let's cancel the thread after its started
+        // FIRST lets make it wait for 1 second.
         try {
-            thread.join();
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        System.out.println("File is ready to be scanned");
-
+        // after waiting 1 sec, lets cancel with .interrupt()
+        // Which Interrupts the thread.
+        // It politely asks a thread to stop what it’s doing. It does NOT force it to stop
+        // it's up to THAT thread to decide if it wants to stop.
+        // It sends a signal (an “interrupted status”) to the thread.
+        // The thread must check for that signal and stop itself. (Found in DownloadFileTask.java)
+        // Think of it like: you tap someone on the shoulder and say "Hey, stop when you get a chance"
+        thread.interrupt();
 
     }
 }

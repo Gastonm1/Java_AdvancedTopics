@@ -1,26 +1,29 @@
 package executors;
-
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 public class CompletableFuturesDemo {
     public static void show(){
-    var future = CompletableFuture.supplyAsync(() -> 1);
-
-    // The following methods are used ona CompletableFuture to say: "When this future is done, run something afterward"
-        // The difference between them is:
-        // Do you need the result of the previous future?
-        // Do you want the follow-up to run asynchronously or in the same thread?
-        // 1) .thenRun(): When the future completes, run this action - but i don't need the result.
-        // Runs after the future finishes, does NOT receive the result, runs in the same thread that completed the previous future.
-        // 2) .thenRunAsync(): Do the same thing as .thenRun(), but run it asynchronously in a different thread
-        // Also does not receive the result, runs in a separate thread
-        // 3) .thenAccept(): When the future completes, receive the result and do something with it.
-        // Consumers the result, returns CompletableFuture<Void>, runs in the same thread that completed the previous future.
-        // 4) .thenAcceptAsync(): Like .thenAccept(), but consume the result asynchronously in another thread.
-        // Receives the result, runs in a different thread.
-        future.thenRunAsync(() -> {
-            System.out.println(Thread.currentThread().getName());
-            System.out.println("Done");
+        var future = CompletableFuture.supplyAsync(() -> {
+            System.out.println("Getting the current weather");
+            throw new IllegalStateException();
         });
+
+        // Exception Handling
+        // .exceptionally(): Lets you recover from an exception inside a CompletableFuture. It catches the error and lets you return a fallback value.
+        // "If something wrong, do this instead"
+        // This way, the future WILL NOT fail - it returns the fallback.
+        // InterruptedException: The thread was told to stop what its doing and return early.
+        // "You're doing something, but someone tapped your shoulder saying stop"
+        // ExecutionException: Something inside the async task threw an exception - this wraps it.
+        // does not tell you the real error directly. It's a wrapper containing the real exception
+            try {
+                var temperature = future.exceptionally(ex -> 1).get();
+                System.out.println(temperature);
+            } catch (InterruptedException e){
+                e.printStackTrace();
+            } catch (ExecutionException e){
+                e.printStackTrace();
+            }
     };
 }

@@ -1,8 +1,15 @@
-import concurrency.ThreadDemo;
-import executors.ExecutorsDemo;
+import executors.MailService;
 
 public class Main {
     public static void main(String[] args) {
-    ExecutorsDemo.show();
+    var service = new MailService();
+    service.sendAsync();
+        System.out.println("Hello World!");
+
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
